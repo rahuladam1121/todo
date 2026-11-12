@@ -1,0 +1,27 @@
+<%= form_with(model: list) do |form| %>
+  <% if list.errors.any? %>
+    <div class="alert alert-danger" role="alert">
+      <h2 class="h5"><%= pluralize(list.errors.count, "error") %> prohibited this item from being saved:</h2>
+
+      <ul>
+        <% list.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :description, "To-do item", class: "form-label" %>
+    <%= form.text_field :description, class: "form-control", autofocus: true, required: true %>
+  </div>
+
+  <div class="form-check mb-4">
+    <%= form.check_box :completed, class: "form-check-input" %>
+    <%= form.label :completed, "Mark as completed", class: "form-check-label" %>
+  </div>
+
+  <div>
+    <%= form.submit(local_assigns.fetch(:submit_label, nil), class: "btn btn-primary") %>
+  </div>
+<% end %>

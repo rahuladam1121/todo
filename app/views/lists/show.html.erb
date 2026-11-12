@@ -1,0 +1,28 @@
+<% content_for :title, @list.description %>
+
+<div class="container py-4">
+  <% if notice.present? %>
+    <div class="alert alert-success" role="status"><%= notice %></div>
+  <% end %>
+
+  <div class="card shadow-sm">
+    <div class="card-body p-4">
+      <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-start gap-3">
+        <div>
+          <p class="text-body-secondary mb-2">To-do item</p>
+          <h1 class="h3 mb-3"><%= @list.description %></h1>
+          <span class="badge rounded-pill <%= @list.completed? ? "text-bg-success" : "text-bg-secondary" %>">
+            <%= @list.completed? ? "Completed" : "Not completed" %>
+          </span>
+        </div>
+        <div class="d-flex flex-wrap gap-2">
+          <%= link_to "Edit item", edit_list_path(@list), class: "btn btn-primary" %>
+          <%= link_to "Back to list", lists_path, class: "btn btn-outline-secondary" %>
+        </div>
+      </div>
+
+      <hr class="my-4">
+      <%= button_to "Delete item", @list, method: :delete, class: "btn btn-outline-danger", form: { data: { turbo_confirm: "Are you sure you want to delete this item?" } } %>
+    </div>
+  </div>
+</div>
